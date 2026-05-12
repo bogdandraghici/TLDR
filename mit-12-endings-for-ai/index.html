@@ -297,9 +297,7 @@
     color: var(--accent);
   }
 
-  /* Ultra-compact takeaways: numbered bold headlines only.
-     Descriptions stay in the HTML but are hidden — readers wanting detail
-     go to the breakdown section below. */
+  /* Compact takeaways with small faint inline description. */
   ol.takeaways {
     list-style: none;
     padding: 0;
@@ -309,9 +307,9 @@
   ol.takeaways li {
     counter-increment: tk;
     position: relative;
-    padding: 6px 0 6px 30px;
+    padding: 8px 0 8px 30px;
     border-top: 1px solid var(--ink-line);
-    font-size: 14.5px;
+    font-size: 14px;
     line-height: 1.45;
   }
   ol.takeaways li:last-child { border-bottom: 1px solid var(--ink-line); }
@@ -319,7 +317,7 @@
     content: counter(tk, decimal-leading-zero);
     position: absolute;
     left: 0;
-    top: 8px;
+    top: 10px;
     font-family: var(--mono);
     font-size: 11px;
     color: var(--accent);
@@ -328,8 +326,15 @@
   ol.takeaways li strong {
     font-weight: 600;
     color: var(--ink);
+    margin-right: 0.35em;
   }
-  ol.takeaways li .desc { display: none; }
+  ol.takeaways li .desc {
+    color: var(--ink-faint);
+  }
+
+  /* Speakers reads as a continuation of takeaways: kill the section gap. */
+  section#speakers { margin-top: 0; }
+  section#speakers > .row > .body > details.speakers-disclosure { border-top: 0; }
 
   /* Speakers: collapsed by default — most readers don't need the cast list,
      but it's still verifiable for those who do. Native <details>, no JS. */

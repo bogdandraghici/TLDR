@@ -97,13 +97,16 @@
   section { margin: 88px 0 0; scroll-margin-top: 24px; }
   h2 { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--ink-faint); letter-spacing: 0.02em; margin: 0 0 22px; text-transform: lowercase; }
   h2::before { content: "§ "; color: var(--accent); }
-  /* Ultra-compact takeaways: numbered bold headlines only. Descriptions hidden. */
+  /* Compact takeaways with small faint inline description. */
   ol.takeaways { list-style: none; padding: 0; margin: 0; counter-reset: tk; }
-  ol.takeaways li { counter-increment: tk; position: relative; padding: 6px 0 6px 30px; border-top: 1px solid var(--ink-line); font-size: 14.5px; line-height: 1.45; }
+  ol.takeaways li { counter-increment: tk; position: relative; padding: 8px 0 8px 30px; border-top: 1px solid var(--ink-line); font-size: 14px; line-height: 1.45; }
   ol.takeaways li:last-child { border-bottom: 1px solid var(--ink-line); }
-  ol.takeaways li::before { content: counter(tk, decimal-leading-zero); position: absolute; left: 0; top: 8px; font-family: var(--mono); font-size: 11px; color: var(--accent); font-variant-numeric: tabular-nums; }
-  ol.takeaways li strong { font-weight: 600; color: var(--ink); }
-  ol.takeaways li .desc { display: none; }
+  ol.takeaways li::before { content: counter(tk, decimal-leading-zero); position: absolute; left: 0; top: 10px; font-family: var(--mono); font-size: 11px; color: var(--accent); font-variant-numeric: tabular-nums; }
+  ol.takeaways li strong { font-weight: 600; color: var(--ink); margin-right: 0.35em; }
+  ol.takeaways li .desc { color: var(--ink-faint); }
+  /* Speakers reads as a continuation of takeaways: kill the section gap. */
+  section#speakers { margin-top: 0; }
+  section#speakers > .row > .body > details.speakers-disclosure { border-top: 0; }
   /* Speakers: collapsed-by-default disclosure. Native <details>, no JS. */
   details.speakers-disclosure { border-top: 1px solid var(--ink-line); border-bottom: 1px solid var(--ink-line); }
   details.speakers-disclosure > summary { list-style: none; cursor: pointer; padding: 14px 0; font-family: var(--sans); font-size: 14.5px; color: var(--ink-soft); display: flex; align-items: center; gap: 10px; user-select: none; }
