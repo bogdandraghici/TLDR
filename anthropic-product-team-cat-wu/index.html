@@ -97,12 +97,13 @@
   section { margin: 88px 0 0; scroll-margin-top: 24px; }
   h2 { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--ink-faint); letter-spacing: 0.02em; margin: 0 0 22px; text-transform: lowercase; }
   h2::before { content: "§ "; color: var(--accent); }
+  /* Compact, inline-wrapping takeaways: counter | bold headline + faint desc */
   ol.takeaways { list-style: none; padding: 0; margin: 0; counter-reset: tk; }
-  ol.takeaways li { counter-increment: tk; display: grid; grid-template-columns: 54px minmax(0, 1fr); column-gap: 18px; padding: 18px 0; border-top: 1px solid var(--ink-line); }
+  ol.takeaways li { counter-increment: tk; position: relative; padding: 10px 0 10px 38px; border-top: 1px solid var(--ink-line); font-size: 15.5px; line-height: 1.5; }
   ol.takeaways li:last-child { border-bottom: 1px solid var(--ink-line); }
-  ol.takeaways li::before { content: counter(tk, decimal-leading-zero); font-family: var(--mono); font-size: 14px; color: var(--accent); padding-top: 2px; font-variant-numeric: tabular-nums; }
-  ol.takeaways li strong { grid-column: 2; display: block; font-weight: 600; color: var(--ink); font-size: 18px; line-height: 1.4; margin-bottom: 4px; }
-  ol.takeaways li .desc { grid-column: 2; display: block; color: var(--ink-soft); font-size: 16px; line-height: 1.55; }
+  ol.takeaways li::before { content: counter(tk, decimal-leading-zero); position: absolute; left: 0; top: 12px; font-family: var(--mono); font-size: 11.5px; color: var(--accent); font-variant-numeric: tabular-nums; }
+  ol.takeaways li strong { font-weight: 600; color: var(--ink); margin-right: 0.4em; }
+  ol.takeaways li .desc { color: var(--ink-soft); }
   /* Speakers: collapsed-by-default disclosure. Native <details>, no JS. */
   details.speakers-disclosure { border-top: 1px solid var(--ink-line); border-bottom: 1px solid var(--ink-line); }
   details.speakers-disclosure > summary { list-style: none; cursor: pointer; padding: 14px 0; font-family: var(--sans); font-size: 14.5px; color: var(--ink-soft); display: flex; align-items: center; gap: 10px; user-select: none; }
