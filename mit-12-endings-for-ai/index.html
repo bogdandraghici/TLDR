@@ -297,7 +297,9 @@
     color: var(--accent);
   }
 
-  /* Compact, inline-wrapping takeaways: counter | bold headline + faint desc */
+  /* Ultra-compact takeaways: numbered bold headlines only.
+     Descriptions stay in the HTML but are hidden — readers wanting detail
+     go to the breakdown section below. */
   ol.takeaways {
     list-style: none;
     padding: 0;
@@ -307,30 +309,27 @@
   ol.takeaways li {
     counter-increment: tk;
     position: relative;
-    padding: 10px 0 10px 38px;
+    padding: 6px 0 6px 30px;
     border-top: 1px solid var(--ink-line);
-    font-size: 15.5px;
-    line-height: 1.5;
+    font-size: 14.5px;
+    line-height: 1.45;
   }
   ol.takeaways li:last-child { border-bottom: 1px solid var(--ink-line); }
   ol.takeaways li::before {
     content: counter(tk, decimal-leading-zero);
     position: absolute;
     left: 0;
-    top: 12px;
+    top: 8px;
     font-family: var(--mono);
-    font-size: 11.5px;
+    font-size: 11px;
     color: var(--accent);
     font-variant-numeric: tabular-nums;
   }
   ol.takeaways li strong {
     font-weight: 600;
     color: var(--ink);
-    margin-right: 0.4em;
   }
-  ol.takeaways li .desc {
-    color: var(--ink-soft);
-  }
+  ol.takeaways li .desc { display: none; }
 
   /* Speakers: collapsed by default — most readers don't need the cast list,
      but it's still verifiable for those who do. Native <details>, no JS. */
