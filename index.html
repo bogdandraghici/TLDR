@@ -43,48 +43,7 @@
   a:hover { color: var(--accent-hi); border-bottom-color: currentColor; }
   ::selection { background: var(--accent-tint); color: var(--ink); }
 
-  .page { max-width: 760px; margin: 0 auto; padding: 0 28px 120px; }
-
-  header.site {
-    padding: 96px 0 56px;
-    border-bottom: 1px solid var(--ink-line);
-  }
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--accent);
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    margin: 0 0 8px;
-  }
-  h1 {
-    font-family: var(--sans);
-    font-size: clamp(40px, 6vw, 64px);
-    line-height: 1.04;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    margin: 0 0 18px;
-    text-wrap: balance;
-  }
-  .dek {
-    font-size: clamp(18px, 1.8vw, 21px);
-    line-height: 1.5;
-    color: var(--ink-soft);
-    margin: 0;
-    font-style: italic;
-    max-width: 30em;
-  }
-
-  h2.section-label {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--ink-faint);
-    letter-spacing: 0.02em;
-    margin: 64px 0 24px;
-    text-transform: lowercase;
-  }
-  h2.section-label::before { content: "§ "; color: var(--accent); }
+  .page { max-width: 760px; margin: 0 auto; padding: 72px 28px 120px; }
 
   ol.articles {
     list-style: none;
@@ -140,31 +99,13 @@
   }
   .article-link::after { content: " →"; }
 
-  footer.colophon {
-    margin-top: 96px;
-    padding-top: 24px;
-    border-top: 1px solid var(--ink-line);
-    font-size: 13px;
-    color: var(--ink-faint);
-    line-height: 1.6;
-  }
-
   @media (max-width: 720px) {
-    .page { padding: 0 22px 80px; }
-    header.site { padding: 60px 0 40px; }
+    .page { padding: 48px 22px 80px; }
   }
 </style>
 </head>
 <body>
 <div class="page">
-
-  <header class="site">
-    <p class="eyebrow">TLDR</p>
-    <h1>Long videos, distilled.</h1>
-    <p class="dek">A growing collection of magazine-style recaps you can read in 10&ndash;15 minutes instead of watching the full video. Every claim links back to the source timestamp.</p>
-  </header>
-
-  <h2 class="section-label">articles</h2>
 
   <ol class="articles">
     <li>
@@ -192,10 +133,6 @@
       <a class="article-link" href="./anthropic-product-team-cat-wu/">Read the recap</a>
     </li>
   </ol>
-
-  <footer class="colophon">
-    Hand-curated. Each recap distills a long-form video into a single self-contained HTML page with timestamps that cue an embedded player.
-  </footer>
 
 </div>
 </body>
