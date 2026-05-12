@@ -38,17 +38,15 @@
   .recap-col { min-width: 0; }
   .transcript-sidebar { position: sticky; top: 24px; height: calc(100vh - 48px); display: flex; flex-direction: column; }
   .sb-head { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid var(--ink-line); }
-  .sb-head .sb-title { font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--ink-faint); letter-spacing: 0.02em; text-transform: lowercase; margin: 0; }
-  .sb-head .sb-title::before { content: "§ "; color: var(--accent); }
-  .sb-head .sb-hint { font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint); letter-spacing: 0.04em; text-transform: uppercase; }
+  .sb-head .sb-title { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin: 0; }
   ol.sb-segments { list-style: none; margin: 0; padding: 12px 0 24px; overflow-y: auto; overflow-x: hidden; flex: 1; font-family: var(--mono); font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); scrollbar-width: thin; scrollbar-color: var(--ink-line) transparent; }
   ol.sb-segments::-webkit-scrollbar { width: 6px; }
   ol.sb-segments::-webkit-scrollbar-track { background: transparent; }
   ol.sb-segments::-webkit-scrollbar-thumb { background: var(--ink-line); border-radius: 3px; }
   ol.sb-segments > li { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 10px; padding: 3px 8px; border-radius: 2px; transition: background .15s ease, color .15s ease; }
-  ol.sb-segments > li .sb-ts { color: var(--ink-faint); font-variant-numeric: tabular-nums; font-size: 11px; padding-top: 2px; white-space: nowrap; }
-  ol.sb-segments > li.is-active { background: oklch(0.92 0.16 95); color: var(--ink); }
-  ol.sb-segments > li.is-active .sb-ts { color: oklch(0.55 0.15 80); }
+  ol.sb-segments > li .sb-ts { color: oklch(0.84 0.005 60); font-variant-numeric: tabular-nums; font-size: 11px; padding-top: 2px; white-space: nowrap; }
+  ol.sb-segments > li.is-active { background: oklch(0.93 0.09 78); color: var(--ink); }
+  ol.sb-segments > li.is-active .sb-ts { color: oklch(0.80 0.04 70); }
   @media (min-width: 1024px) {
     ol.ideas > li { cursor: default; }
     body.player-floating .player-frame { inset: auto auto 24px 24px; }
@@ -94,9 +92,16 @@
   body.player-hidden .player-restore-bar { display: flex; }
   .player-restore-bar { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 99; background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 999px; font-family: var(--sans); font-size: 13px; cursor: pointer; border: 0; box-shadow: 0 10px 30px -12px oklch(0 0 0 / .35); align-items: center; gap: 6px; }
   .player-restore-bar:hover { background: var(--accent); }
+  /* Thin sticky topbar with an inline scroll-progress fill. Appears once the hero scrolls out of view; the 2px track at the bottom doubles as the divider rule and fills with --accent as the reader progresses. */
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 90; background: var(--bg); transform: translateY(-100%); transition: transform .25s cubic-bezier(0.22,1,0.36,1); pointer-events: none; }
+  body.topbar-visible .topbar { transform: translateY(0); pointer-events: auto; }
+  .topbar-inner { max-width: var(--page-max); margin: 0 auto; padding: 10px 28px 12px; display: flex; align-items: center; gap: 16px; }
+  .topbar-title { flex: 1; min-width: 0; font-family: var(--sans); font-size: 12.5px; font-weight: 600; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .topbar-pct { font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint); letter-spacing: 0.08em; font-variant-numeric: tabular-nums; }
+  .topbar-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--ink-line); overflow: hidden; }
+  .topbar-progress-fill { height: 100%; width: 0; background: var(--accent); transition: width .08s linear; }
   section { margin: 88px 0 0; scroll-margin-top: 24px; }
-  h2 { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--ink-faint); letter-spacing: 0.02em; margin: 0 0 22px; text-transform: lowercase; }
-  h2::before { content: "§ "; color: var(--accent); }
+  h2 { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 0.14em; margin: 0 0 22px; text-transform: uppercase; }
   /* Compact takeaways with small faint inline description. */
   ol.takeaways { list-style: none; padding: 0; margin: 0; counter-reset: tk; }
   ol.takeaways li { counter-increment: tk; position: relative; padding: 8px 0 8px 30px; border-top: 1px solid var(--ink-line); font-size: 14px; line-height: 1.45; }
@@ -109,14 +114,14 @@
   section#speakers > .row > .body > details.speakers-disclosure { border-top: 0; }
   /* Speakers: collapsed-by-default disclosure. Native <details>, no JS. */
   details.speakers-disclosure { border-top: 1px solid var(--ink-line); border-bottom: 1px solid var(--ink-line); }
-  details.speakers-disclosure > summary { list-style: none; cursor: pointer; padding: 14px 0; font-family: var(--sans); font-size: 14.5px; color: var(--ink-soft); display: flex; align-items: center; gap: 10px; user-select: none; }
+  details.speakers-disclosure > summary { list-style: none; cursor: pointer; padding: 14px 0; font-family: var(--sans); font-size: 14px; line-height: 1.45; color: var(--ink-soft); display: flex; align-items: center; gap: 10px; user-select: none; }
   details.speakers-disclosure > summary::-webkit-details-marker { display: none; }
   details.speakers-disclosure > summary::before { content: "+"; font-family: var(--mono); font-size: 16px; color: var(--accent); width: 14px; text-align: center; line-height: 1; display: inline-block; }
   details.speakers-disclosure[open] > summary::before { content: "−"; }
   details.speakers-disclosure > summary .count { font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint); letter-spacing: 0.04em; text-transform: uppercase; margin-left: auto; }
   details.speakers-disclosure > summary:hover { color: var(--ink); }
   .speakers { display: flex; flex-direction: column; gap: 8px; padding: 6px 0 16px; }
-  .speaker { font-size: 14.5px; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+  .speaker { font-size: 14px; line-height: 1.45; color: var(--ink-soft); margin: 0; }
   .speaker .name { color: var(--ink); font-weight: 600; }
   .speaker .role { color: var(--ink-faint); }
   .speaker .sep { color: var(--ink-line); margin: 0 6px; }
@@ -165,6 +170,8 @@
     .chapter-num { font-size: 22px; padding-top: 0; margin-bottom: 4px; }
     ol.ideas > li { grid-template-columns: 76px 1fr; column-gap: 14px; }
     body.player-floating .player-frame { inset: auto 14px 14px auto; width: 200px; }
+    .topbar-inner { padding: 9px 22px 11px; }
+    .topbar-title { font-size: 12px; }
     body { font-size: 17px; }
     .hero { padding: 48px 0 36px; }
     section { margin-top: 64px; }
@@ -172,7 +179,7 @@
   }
   @media print {
     :root { --bg: #fff; --snippet-bg: #f4f1ec; }
-    .player-wrap, .player-restore-bar { display: none !important; }
+    .player-wrap, .player-restore-bar, .topbar { display: none !important; }
     body { font-size: 11.5pt; color: #1a1814; }
     a { color: #1a1814; border-bottom: 0; }
     .timestamp, .idea-source { background: transparent; }
@@ -181,6 +188,13 @@
 </style>
 </head>
 <body>
+<div class="topbar" id="topbar" aria-hidden="true">
+  <div class="topbar-inner">
+    <span class="topbar-title" id="topbar-title"></span>
+    <span class="topbar-pct" id="topbar-pct">0%</span>
+  </div>
+  <div class="topbar-progress"><div class="topbar-progress-fill" id="topbar-progress-fill"></div></div>
+</div>
 <div class="page">
 <div class="recap-col">
 
@@ -934,7 +948,7 @@
 </div><!-- /.recap-col -->
 
   <aside class="transcript-sidebar" aria-label="Full transcript">
-    <header class="sb-head"><p class="sb-title">transcript</p><span class="sb-hint">hover an idea</span></header>
+    <header class="sb-head"><p class="sb-title">transcript</p></header>
     <ol class="sb-segments" id="sb-segments">
       <li data-s="0"><span class="sb-ts">00:00</span><span class="sb-text">I think it is very hard to be the right</span></li>
       <li data-s="2"><span class="sb-ts">00:02</span><span class="sb-text">amount of AGI pled. It&#x27;s very easy to</span></li>
@@ -3343,7 +3357,9 @@
     if (hero && "IntersectionObserver" in window) {
       const io = new IntersectionObserver(function (entries) {
         for (const entry of entries) {
-          document.body.classList.toggle("player-floating", !entry.isIntersecting);
+          const past = !entry.isIntersecting;
+          document.body.classList.toggle("player-floating", past);
+          document.body.classList.toggle("topbar-visible", past);
         }
       }, { rootMargin: "-40px 0px 0px 0px", threshold: 0 });
       io.observe(hero);
@@ -3395,6 +3411,32 @@
       li.addEventListener("mouseenter", handler);
       li.addEventListener("focusin", handler);
     });
+  })();
+
+  // Topbar: mirror the article title and update the scroll-progress fill.
+  (function () {
+    const titleEl = document.getElementById("topbar-title");
+    const fill = document.getElementById("topbar-progress-fill");
+    const pctEl = document.getElementById("topbar-pct");
+    const h1 = document.querySelector("h1.title");
+    if (titleEl && h1) titleEl.textContent = h1.textContent.trim();
+    if (!fill || !pctEl) return;
+    let rafId = null;
+    function update() {
+      rafId = null;
+      const doc = document.documentElement;
+      const max = (doc.scrollHeight || 0) - window.innerHeight;
+      const pct = max > 0 ? Math.max(0, Math.min(1, window.scrollY / max)) : 0;
+      fill.style.width = (pct * 100).toFixed(2) + "%";
+      pctEl.textContent = Math.round(pct * 100) + "%";
+    }
+    function schedule() {
+      if (rafId != null) return;
+      rafId = requestAnimationFrame(update);
+    }
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    update();
   })();
 </script>
 </body>
